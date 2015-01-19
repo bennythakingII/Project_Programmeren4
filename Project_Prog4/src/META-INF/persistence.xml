@@ -3,6 +3,7 @@
   <persistence-unit name="Project_Prog4PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>DAL.RestaurantPlaatsen</class>
+    <class>DAL.Gerechten</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/ProjectRestaurantdb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -21,33 +21,35 @@ public class RestaurantPlaatsen implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     
-    private Long id;
-    private int seatCapacity;
+    
+    
+    private Long tableID;
+    private int plaatsen;
     
 
     public Long getId() {
-        return id;
+        return tableID;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.tableID = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (tableID != null ? tableID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the tableID fields are not set
         if (!(object instanceof RestaurantPlaatsen)) {
             return false;
         }
         RestaurantPlaatsen other = (RestaurantPlaatsen) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.tableID == null && other.tableID != null) || (this.tableID != null && !this.tableID.equals(other.tableID))) {
             return false;
         }
         return true;
@@ -55,15 +57,15 @@ public class RestaurantPlaatsen implements Serializable {
 
     @Override
     public String toString() {
-        return "DAL.RestaurantPlaatsen[ id=" + id + " ]";
+        return "DAL.RestaurantPlaatsen[ id=" + tableID + " ]";
     }
 
     public int getSeatCapacity() {
-        return seatCapacity;
+        return plaatsen;
     }
 
     public void setSeatCapacity(int seatCapacity) {
-        this.seatCapacity = seatCapacity;
+        this.plaatsen = seatCapacity;
     }
     
 }
