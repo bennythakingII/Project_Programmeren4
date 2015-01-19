@@ -20,7 +20,10 @@ public class RestaurantPlaatsen implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    
     private Long id;
+    private int seatCapacity;
+    
 
     public Long getId() {
         return id;
@@ -53,6 +56,14 @@ public class RestaurantPlaatsen implements Serializable {
     @Override
     public String toString() {
         return "DAL.RestaurantPlaatsen[ id=" + id + " ]";
+    }
+
+    public int getSeatCapacity() {
+        return seatCapacity;
+    }
+
+    public void setSeatCapacity(int seatCapacity) {
+        this.seatCapacity = seatCapacity;
     }
     
 }
