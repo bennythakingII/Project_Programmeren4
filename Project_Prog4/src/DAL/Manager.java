@@ -16,53 +16,44 @@ import javax.persistence.Id;
  * @author Benjamin
  */
 @Entity
-public class RestaurantPlaatsen implements Serializable {
+public class Manager implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
-    
-    
-    private Long tableID;
-    private int plaatsen;
-    
+    private Long id;
+    private Gebruikermanager GM;
 
     public Long getId() {
-        return tableID;
+        return id;
     }
 
     public void setId(Long id) {
-        this.tableID = id;
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tableID != null ? tableID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the tableID fields are not set
-        if (!(object instanceof RestaurantPlaatsen)) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Manager)) {
             return false;
         }
-        RestaurantPlaatsen other = (RestaurantPlaatsen) object;
-        return !((this.tableID == null && other.tableID != null) || (this.tableID != null && !this.tableID.equals(other.tableID)));
+        Manager other = (Manager) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "DAL.RestaurantPlaatsen[ id=" + tableID + " ]";
-    }
-
-    public int getSeatCapacity() {
-        return plaatsen;
-    }
-
-    public void setSeatCapacity(int seatCapacity) {
-        this.plaatsen = seatCapacity;
+        return "DAL.Manager[ id=" + id + " ]";
     }
     
 }

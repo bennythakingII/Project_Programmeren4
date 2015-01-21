@@ -4,6 +4,12 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>DAL.RestaurantPlaatsen</class>
     <class>DAL.Gerechten</class>
+    <class>DAL.Gebruiker</class>
+    <class>DAL.Reservatie</class>
+    <class>Services.Insert</class>
+    <class>DAL.Manager</class>
+    <class>DAL.Gebruikermanager</class>
+    <class>DAL.Plaatsenmanager</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/ProjectRestaurantdb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
