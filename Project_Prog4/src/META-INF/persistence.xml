@@ -7,7 +7,6 @@
     <class>DAL.Gebruiker</class>
     <class>DAL.Reservatie</class>
     <class>Services.Insert</class>
-    <class>DAL.Manager</class>
     <class>DAL.Gebruikermanager</class>
     <class>DAL.Plaatsenmanager</class>
     <properties>

@@ -20,8 +20,9 @@ public class Gebruiker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     
+    
+    private Long gebruikerID;
     private String naam;
     private String password;
     private String telefoonnummer;
@@ -29,33 +30,33 @@ public class Gebruiker implements Serializable {
     
 
     public Long getId() {
-        return id;
+        return gebruikerID;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.gebruikerID = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (gebruikerID != null ? gebruikerID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the gebruikerID fields are not set
         if (!(object instanceof Gebruiker)) {
             return false;
         }
         Gebruiker other = (Gebruiker) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        return !((this.gebruikerID == null && other.gebruikerID != null) || (this.gebruikerID != null && !this.gebruikerID.equals(other.gebruikerID)));
     }
 
     @Override
     public String toString() {
-        return "DAL.Gebruiker[ id=" + id + " ]";
+        return "DAL.Gebruiker[ id=" + gebruikerID + " ]";
     }
 
     public String getNaam() {

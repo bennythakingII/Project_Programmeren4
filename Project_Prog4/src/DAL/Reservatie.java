@@ -20,8 +20,8 @@ public class Reservatie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     
+    private Long ReservatieID;   
     private Gebruiker gebruiker;
     private RestaurantPlaatsen plaatsen;
     private String date;
@@ -36,28 +36,28 @@ public class Reservatie implements Serializable {
     protected  Reservatie() {}
     
     public Long getId() {
-        return id;
+        return ReservatieID;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.ReservatieID = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (ReservatieID != null ? ReservatieID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the ReservatieID fields are not set
         if (!(object instanceof Reservatie)) {
             return false;
         }
         Reservatie other = (Reservatie) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.ReservatieID == null && other.ReservatieID != null) || (this.ReservatieID != null && !this.ReservatieID.equals(other.ReservatieID))) {
             return false;
         }
         return true;
@@ -65,7 +65,7 @@ public class Reservatie implements Serializable {
 
     @Override
     public String toString() {
-        return "DAL.Reservatie[ id=" + id + " ]";
+        return "DAL.Reservatie[ id=" + ReservatieID + " ]";
     }
 
     public Gebruiker getGebruiker() {

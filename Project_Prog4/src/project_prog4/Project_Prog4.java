@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -31,9 +31,7 @@ public class Project_Prog4 {
         gebruiker.setPassword("test");
         gebruiker.setTelefoonnummer("+3236664789");
         
-        //login
         
-        bolean inlog =  
         
         
     }
