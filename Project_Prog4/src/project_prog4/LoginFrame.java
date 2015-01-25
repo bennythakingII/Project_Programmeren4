@@ -5,6 +5,12 @@
  */
 package project_prog4;
 
+import DAL.*;
+import Services.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 /**
  *
  * @author Benjamin
@@ -100,7 +106,19 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            Zoeken z = new Zoeken();
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+            EntityManager em = emf.createEntityManager();
+            
+            Gebruiker g = z.ZoekGebruikerDoorNaam(txtLoginNaam.getText());
+            if(g.isAdmin() == true && g.getPassword().equals(txtLoginPasswoord.getText()))
+            {
+                new 
+            }
+            
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

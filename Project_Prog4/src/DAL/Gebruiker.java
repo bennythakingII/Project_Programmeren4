@@ -27,6 +27,7 @@ public class Gebruiker implements Serializable {
     private String password;
     private String telefoonnummer;
     private String email;
+    private boolean Admin;
     
 
     public Long getId() {
@@ -89,6 +90,20 @@ public class Gebruiker implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the Admin
+     */
+    public boolean isAdmin() {
+        return Admin;
+    }
+
+    /**
+     * @param Admin the Admin to set
+     */
+    public void setAdmin(boolean Admin) {
+        this.Admin = Admin;
     }
     
 }

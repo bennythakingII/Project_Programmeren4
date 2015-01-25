@@ -31,8 +31,8 @@ public boolean DeleteReservatie (long id)
     EntityTransaction trans = em.getTransaction();
     trans.begin();
     
-    TypedQuery<Reservatie> queryReservatie = em.createQuery("DELETE FROM Reservatie p WHERE p.reservatieID = :Id", Reservatie.class);
-    queryReservatie.setParameter("Id", r.getId()).executeupdate();
+//    TypedQuery<Reservatie> queryReservatie = em.createQuery("DELETE FROM Reservatie p WHERE p.reservatieID = :Id", Reservatie.class);
+//    queryReservatie.setParameter("Id", r.getId()).executeupdate();
     
     trans.commit();
     em.close();

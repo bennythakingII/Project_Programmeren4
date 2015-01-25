@@ -54,6 +54,7 @@ public class GebruikerFrame extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
+        txtBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,12 +85,39 @@ public class GebruikerFrame extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        txtBack.setText("Back");
+        txtBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,11 +151,12 @@ public class GebruikerFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnOpslaan, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNew)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)))
                 .addContainerGap())
         );
@@ -156,7 +185,8 @@ public class GebruikerFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnNew)
-                    .addComponent(btnEdit))
+                    .addComponent(btnEdit)
+                    .addComponent(txtBack))
                 .addGap(19, 19, 19))
         );
 
@@ -196,6 +226,44 @@ public class GebruikerFrame extends javax.swing.JFrame {
         catch(Exception ex)
         {}
     }//GEN-LAST:event_btnOpslaanActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        setTextbox();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        if(lsbGebruiker.getSelectedIndex() != -1)
+        {
+            edit = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "no select");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        txtID.setText("");
+        txtNaam.setText("");
+        txtPassword.setText("");
+        edit = false;
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if(lsbGebruiker.getSelectedIndex() != -1)
+        {
+            del.DeleteReservatie((Integer.parseInt(txtID.getText())));
+            txtID.setText("");
+            txtNaam.setText("");
+            txtPassword.setText("");
+            RefreshList();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBackActionPerformed
+      //  new MainFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_txtBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +312,7 @@ public class GebruikerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList lsbGebruiker;
+    private javax.swing.JButton txtBack;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNaam;
     private javax.swing.JTextField txtPassword;
