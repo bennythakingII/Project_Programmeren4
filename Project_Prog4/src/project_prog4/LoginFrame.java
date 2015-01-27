@@ -5,11 +5,12 @@
  */
 package project_prog4;
 
-import DAL.*;
-import Services.*;
+import DAL.Gebruiker;
+import Services.Zoeken;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,14 +34,21 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnLogin = new javax.swing.JButton();
+        txtLoginPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtLoginNaam = new javax.swing.JTextField();
-        txtLoginPasswoord = new javax.swing.JPasswordField();
+        txtLoginUsername = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtLoginPassword.setText("jPasswordField1");
+
+        jLabel1.setText("Username");
+
+        jLabel2.setText("Password");
+
+        txtLoginUsername.setText("jTextField1");
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -49,18 +57,6 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Naam");
-
-        jLabel2.setText("Passwoord");
-
-        jLabel3.setForeground(new java.awt.Color(51, 51, 41));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Login");
-
-        txtLoginNaam.setText("jTextField1");
-
-        txtLoginPasswoord.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,56 +64,57 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(37, 37, 37)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLoginPasswoord)
-                            .addComponent(txtLoginNaam)))
+                            .addComponent(txtLoginPassword)
+                            .addComponent(txtLoginUsername)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(btnLogin)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addGap(107, 107, 107)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(31, 31, 31)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtLoginNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(txtLoginUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtLoginPasswoord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(30, 30, 30)
                 .addComponent(btnLogin)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try
-        {
+        try {
             Zoeken z = new Zoeken();
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
             EntityManager em = emf.createEntityManager();
             
-            Gebruiker g = z.ZoekGebruikerDoorNaam(txtLoginNaam.getText());
-            if(g.isAdmin() == true && g.getPassword().equals(txtLoginPasswoord.getText()))
+            Gebruiker g = z.ZoekGebruikerDoorNaam(txtLoginUsername.getText());
+            if(g.isAdmin() == true && g.getPassword().equals(txtLoginPassword.getText()))
             {
-                new 
+                new MainFrame().setVisible(true);
+                this.setVisible(false);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Password is wrong","Fout", JOptionPane.WARNING_MESSAGE);
             }
             
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"De naam dat u heeft ingevoerd bestaat niet, als deze wel zou moeten bestaan neem dan contact op met onze support", "NoName", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -160,8 +157,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtLoginNaam;
-    private javax.swing.JPasswordField txtLoginPasswoord;
+    private javax.swing.JPasswordField txtLoginPassword;
+    private javax.swing.JTextField txtLoginUsername;
     // End of variables declaration//GEN-END:variables
 }

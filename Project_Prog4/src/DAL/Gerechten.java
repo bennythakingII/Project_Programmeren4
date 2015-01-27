@@ -27,7 +27,7 @@ public class Gerechten implements Serializable {
     private double GerechtPrijs;
     private int GerechtenVoorraad;
     private int GerechtenAantalBesteld;
-    private double Totaal;
+    private int Totaal;
     
     
 
@@ -96,11 +96,11 @@ public class Gerechten implements Serializable {
         this.GerechtenAantalBesteld = GerechtenAantalBesteld;
     }
 
-    public double getTotaal() {
+    public int getTotaal() {
         return Totaal;
     }
 
-    public void setTotaal(double Totaal) {
+    public void setTotaal(int Totaal) {
         this.Totaal = Totaal;
     }
     

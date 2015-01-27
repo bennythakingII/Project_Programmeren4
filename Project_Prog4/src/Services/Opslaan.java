@@ -27,28 +27,28 @@ public class Opslaan
             Zoeken z = new Zoeken();
             long l = z.ZoekGebruikerDoorNaam(gebruiker.getNaam()).getId();
             System.out.println(l);
-            if(1==0)
+            if(l==0)
             {
-                long id = 0;
-                List<Gebruiker> listresult = new AanmakenList().ListGebruiker();
-                if(!listresult.isEmpty())
-                {
-                    for(Gebruiker g : listresult)
-                    {
-                    if(id < g.getId())
-                    {
-                        id = g.getId();
-                    }
-                    }
-                    id = id + 1;
-                }
-                else
-                {
-                    id = 1;
-                }
+//                long id = 0;
+//                List<Gebruiker> listresult = new AanmakenList().ListGebruiker();
+//                if(!listresult.isEmpty())
+//                {
+//                    for(Gebruiker g : listresult)
+//                    {
+//                    if(id < g.getId())
+//                    {
+//                        id = g.getId();
+//                    }
+//                    }
+//                    id = id + 1;
+//                }
+//                else
+//                {
+//                    id = 1;
+//                }
                 
-                gebruiker.setId(id);
-                EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+//                gebruiker.setId(id);
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
                 EntityManager em = emf.createEntityManager();
                 EntityTransaction trans = em.getTransaction();
                 
@@ -75,58 +75,40 @@ public class Opslaan
     
     //Gerechten aanmaken
     
-//     public int OpslaanGebruiker(DAL.Gebruiker gebruiker)
-//    {
-//    
-//        try
-//        {
-//            Zoeken z = new Zoeken();
-//            long l = z.ZoekGebruikerDoorNaam(gebruiker.getNaam()).getId();
-//            System.out.println(l);
-//            if(1==0)
-//            {
-//                long id = 0;
-//                List<Gebruiker> listresult = new AanmakenList().ListGebruiker();
-//                if(!listresult.isEmpty())
-//                {
-//                    for(Gebruiker g : listresult)
-//                    {
-//                    if(id < g.getId())
-//                    {
-//                        id = g.getId();
-//                    }
-//                    }
-//                    id = id + 1;
-//                }
-//                else
-//                {
-//                    id = 1;
-//                }
-//                
-//                gebruiker.setId(id);
-//                EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
-//                EntityManager em = emf.createEntityManager();
-//                EntityTransaction trans = em.getTransaction();
-//                
-//                trans.begin();
-//                em.persist(gebruiker);
-//                trans.commit();
-//                em.clear();
-//                em.close();
-//                emf.close();
-//                return 0;
-//                
-//            }
-//            
-//            else {return 2;}
-//           
-//        }
-//        
-//        catch(Exception ex)
-//        {
-//            return 1;
-//        }  
-//        
-//    }
+     public int OpslaanGerechten(DAL.Gerechten gerechten)
+    {
+    
+        try
+        {
+            Zoeken z = new Zoeken();
+            long l = z.ZoekGebruikerDoorNaam(gerechten.getGerechtNaam()).getId();
+            System.out.println(l);
+            if(l==0)
+            {
+               
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
+                EntityManager em = emf.createEntityManager();
+                EntityTransaction trans = em.getTransaction();
+                
+                trans.begin();
+                em.persist(gerechten);
+                trans.commit();
+                em.clear();
+                em.close();
+                emf.close();
+                return 0;
+                
+            }
+            
+            else {return 2;}
+           
+        }
+        
+        catch(Exception ex)
+        {
+            return 1;
+        }  
+        
+    }
     
 }

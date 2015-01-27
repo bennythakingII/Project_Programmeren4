@@ -5,11 +5,25 @@
  */
 package project_prog4;
 
+import DAL.Gerechten;
+import Services.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Benjamin
  */
 public class GerechtenFrame extends javax.swing.JFrame {
+    
+    Opslaan opslaan = new Opslaan();
+    AanmakenList aanmakenList = new AanmakenList();
+    Delete delete = new Delete();
+    Zoeken zoek = new Zoeken();
+    Update update = new Update();
+    ArrayList<String> naam = new ArrayList<>();
+    boolean edit = false;
 
     /**
      * Creates new form GerechtenFrame
@@ -28,34 +42,97 @@ public class GerechtenFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lsbWeergaveGerechten = new javax.swing.JList();
-        txtGerechtNaamWeergave = new javax.swing.JTextField();
-        txtGerechtPrijsWeergave = new javax.swing.JTextField();
+        lsbGerechten = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
-        txtGerechtenAantalBestellen = new javax.swing.JTextField();
-        btnGerechtenBestellen = new javax.swing.JButton();
-        btnGerechtenAnnuleren = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtGerechtID = new javax.swing.JTextField();
+        txtGerechtNaam = new javax.swing.JTextField();
+        txtGerechtPrijs = new javax.swing.JTextField();
+        txtGerechtVoorraad = new javax.swing.JTextField();
+        txtGerechtAantalBesteld = new javax.swing.JTextField();
+        txtGerechtTotaal = new javax.swing.JTextField();
+        btnNew = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lsbWeergaveGerechten.setModel(new javax.swing.AbstractListModel() {
+        lsbGerechten.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(lsbWeergaveGerechten);
+        lsbGerechten.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lsbGerechtenValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lsbGerechten);
 
-        txtGerechtNaamWeergave.setText("jTextField1");
+        jLabel1.setText("Gerecht ID");
 
-        txtGerechtPrijsWeergave.setText("jTextField2");
+        jLabel2.setText("Gerecht Naam");
 
-        jLabel1.setText("Aantal:");
+        jLabel3.setText("Gerecht Prijs");
 
-        txtGerechtenAantalBestellen.setText("jTextField3");
+        jLabel4.setText("Voorraad");
 
-        btnGerechtenBestellen.setText("Bestellen");
+        jLabel5.setText("Aantal Besteld");
 
-        btnGerechtenAnnuleren.setText("Annuleren");
+        jLabel6.setText("Totaal");
+
+        txtGerechtID.setText("jTextField1");
+
+        txtGerechtNaam.setText("jTextField2");
+
+        txtGerechtPrijs.setText("jTextField3");
+
+        txtGerechtVoorraad.setText("jTextField4");
+
+        txtGerechtAantalBesteld.setText("jTextField5");
+
+        txtGerechtTotaal.setText("jTextField6");
+
+        btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,45 +140,255 @@ public class GerechtenFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGerechtenBestellen)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtGerechtPrijs, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtGerechtVoorraad, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtGerechtTotaal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGerechtAantalBesteld)
+                            .addComponent(txtGerechtNaam)
+                            .addComponent(txtGerechtID)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNew)
                         .addGap(18, 18, 18)
-                        .addComponent(btnGerechtenAnnuleren))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(btnEdit)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtGerechtenAantalBestellen, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtGerechtPrijsWeergave)
-                    .addComponent(txtGerechtNaamWeergave))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnBack))
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtGerechtNaamWeergave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtGerechtPrijsWeergave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtGerechtenAantalBestellen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
+                            .addComponent(txtGerechtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGerechtenBestellen)
-                            .addComponent(btnGerechtenAnnuleren)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addComponent(txtGerechtNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtGerechtPrijs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtGerechtVoorraad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtGerechtAantalBesteld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtGerechtTotaal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNew)
+                            .addComponent(btnEdit)
+                            .addComponent(btnDelete)
+                            .addComponent(btnBack))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSave)
+                        .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        edit = false;
+        EnableText();
+        DisableButton();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        try
+        {
+            if(edit == false)
+            {
+                Gerechten gerechten  = new Gerechten();
+                gerechten.setGerechtNaam(txtGerechtNaam.getText());
+                gerechten.setGerechtPrijs(Double.parseDouble(txtGerechtPrijs.getText()));
+                gerechten.setTotaal(Integer.parseInt(txtGerechtTotaal.getText()));
+                int result = opslaan.OpslaanGerechten(gerechten);
+                if(result == 1)
+                {
+                    JOptionPane.showMessageDialog(null, "Er was een probleem");
+                }
+                else if (result == 2)
+                {
+                    JOptionPane.showMessageDialog(null, "Dit gerecht bestaat reeds");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Done");
+                    RefreshList();
+                    DisableText();
+                    EnableButton();
+                }
+            }
+            
+            else if(edit == true)
+            {
+                Gerechten g =  new Gerechten();
+                g.setGerechtNaam(txtGerechtNaam.getText());
+                g.setGerechtPrijs(Double.parseDouble(txtGerechtPrijs.getText()));
+                g.setTotaal(Integer.parseInt(txtGerechtTotaal.getText()));
+                g.setId(Long.parseLong(txtGerechtID.getText()));
+                boolean result = update.UpdateGerecht(g);
+                if(result == true)
+                {
+                    JOptionPane.showMessageDialog(null, "Update gelukt");
+                    RefreshList();
+                    DisableText();
+                    EnableButton();
+                }
+                
+                else 
+                {JOptionPane.showInternalMessageDialog(null, "Update gefaald");}
+            }
+            else
+                    {
+                        JOptionPane.showMessageDialog(null,"Er is een overwachte fout opgedoken, gelieve contact op te nemen met u beheerder");
+                    }
+        }
+        catch(Exception ex){JOptionPane.showInternalMessageDialog(null, "Er is een probleem bij u ingave" + ex.getMessage());}
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        if(lsbGerechten.getSelectedIndex() != -1)
+        {
+            edit = true;
+            txtGerechtTotaal.setEnabled(true);
+            txtGerechtNaam.setEnabled(true);
+            txtGerechtPrijs.setEnabled(true);
+            txtGerechtVoorraad.setEnabled(true);
+            DisableButton();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "niet geselecteerd");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if(lsbGerechten.getSelectedIndex() != -1)
+        {
+            delete.DeleteGerechten(Integer.parseInt(txtGerechtID.getText()));
+            DisableText();
+            RefreshList();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        this.setVisible(false);
+        new MainFrame().setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void lsbGerechtenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsbGerechtenValueChanged
+        int result = lsbGerechten.getSelectedIndex();
+        Gerechten gerechtenresultaat = zoek.ZoekGerechtByName(naam.get(result));
+        txtGerechtTotaal.setText(Integer.toString(gerechtenresultaat.getTotaal()));
+        txtGerechtID.setText(Long.toString(gerechtenresultaat.getId()));
+        txtGerechtPrijs.setText(Double.toString(gerechtenresultaat.getGerechtPrijs()));
+        txtGerechtVoorraad.setText(Integer.toString(gerechtenresultaat.getGerechtenVoorraad()));
+        txtGerechtAantalBesteld.setText(Integer.toString(gerechtenresultaat.getGerechtenAantalBesteld()));
+        
+    }//GEN-LAST:event_lsbGerechtenValueChanged
+
+    private void RefreshList()
+    {
+        try 
+            {
+                naam.clear();
+                AanmakenList list = new AanmakenList();
+                List<Gerechten> GerechtenList = list.ListGerechten();
+                for(Gerechten g: GerechtenList)
+                {
+                    naam.add(g.getGerechtNaam());
+                }
+                lsbGerechten.setListData(naam.toArray());
+        
+            } 
+        catch (Exception e) {}
+    }
+    
+    private void DisableButton()
+    {
+      
+        btnDelete.setVisible(false);
+        btnEdit.setVisible(false);
+        btnNew.setVisible(false);
+        btnSave.setVisible(true);
+    }
+    
+    public void EnableButton()
+    {
+        btnDelete.setVisible(true);
+        btnEdit.setVisible(true);
+        btnNew.setVisible(true);
+        btnSave.setVisible(false);
+    }
+    
+    private void DisableText()
+    {
+        txtGerechtID.setText("");
+        txtGerechtNaam.setEnabled(false);
+        txtGerechtPrijs.setEnabled(false);
+        txtGerechtTotaal.setEnabled(false);
+        
+        txtGerechtNaam.setText("");
+        txtGerechtPrijs.setText("");
+        txtGerechtVoorraad.setText("");
+        txtGerechtTotaal.setText("");
+    }
+    
+    private void EnableText()
+    {
+        txtGerechtID.setText("");
+        txtGerechtNaam.setEnabled(true);
+        txtGerechtPrijs.setEnabled(true);
+        txtGerechtTotaal.setEnabled(true);
+        
+        txtGerechtNaam.setText("");
+        txtGerechtPrijs.setText("");
+        txtGerechtVoorraad.setText("");
+        txtGerechtTotaal.setText("");
+    }
+    
+//    private void EnableButton()
+//    {
+//        btnDelete.setVisible(true);
+//        btnEdit.setVisible(true);
+//        btnNew.setVisible(true);
+//        btnSave.setVisible(false);
+//    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -138,13 +425,26 @@ public class GerechtenFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGerechtenAnnuleren;
-    private javax.swing.JButton btnGerechtenBestellen;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList lsbWeergaveGerechten;
-    private javax.swing.JTextField txtGerechtNaamWeergave;
-    private javax.swing.JTextField txtGerechtPrijsWeergave;
-    private javax.swing.JTextField txtGerechtenAantalBestellen;
+    private javax.swing.JList lsbGerechten;
+    private javax.swing.JTextField txtGerechtAantalBesteld;
+    private javax.swing.JTextField txtGerechtID;
+    private javax.swing.JTextField txtGerechtNaam;
+    private javax.swing.JTextField txtGerechtPrijs;
+    private javax.swing.JTextField txtGerechtTotaal;
+    private javax.swing.JTextField txtGerechtVoorraad;
     // End of variables declaration//GEN-END:variables
+
+    
 }

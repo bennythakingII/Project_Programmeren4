@@ -22,7 +22,7 @@ public class Zoeken {
     {
         try
         {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
             EntityManager em = emf.createEntityManager();
             
             TypedQuery<Gebruiker> query = em.createQuery("SELECT d FROM Gebruiker d WHERE d.naam = :naam", Gebruiker.class);
@@ -44,7 +44,7 @@ public class Zoeken {
     {
         try 
         {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
             EntityManager em = emf.createEntityManager();
             
             TypedQuery<Gerechten> query = em.createQuery("SELECT d FROM Gerechten d WHERE d.GerechtNaam = :naam", Gerechten.class);
@@ -67,7 +67,7 @@ public class Zoeken {
     {
         try
         {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
             EntityManager em = emf.createEntityManager();
             
             TypedQuery<Gebruiker> query = em.createQuery("SELECT d FROM Gebruiker d WHERE d.gebruikerID = :id", Gebruiker.class);
@@ -90,7 +90,7 @@ public class Zoeken {
         {
             try
             {
-                EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
                 EntityManager em = emf.createEntityManager();
                 
                 TypedQuery<Reservatie> query = em.createQuery("SELECT d FROM Reservatie d WHERE d.reservatieID = :Id", Reservatie.class);
@@ -108,6 +108,27 @@ public class Zoeken {
                 return nul;
             }
         }
+    
+    public DAL.Gerechten ZoekGerechtenByID(long id)
+            {
+                try {
+                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
+                    EntityManager em = emf.createEntityManager();
+                    
+                    TypedQuery<Gerechten> query = em.createQuery("SELECT d from Gerechten d WHERE d.gerechtenID = :Id", Gerechten.class);
+                    Gerechten gerecht = query.setParameter("Id", id).getSingleResult();
+                    
+                    em.close();
+                    emf.close();
+                    return gerecht;
+                    
+                    
+                } catch (Exception e) {
+                    Gerechten nul = new Gerechten();
+                    nul.setId(Long.parseLong("0"));
+                    return nul;
+                }
+            }
 }
 
 //
