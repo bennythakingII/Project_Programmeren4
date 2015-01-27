@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListGerechtenTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListGerechtenEmpty}" rendered="#{gerechtenController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{gerechtenController.items.rowCount > 0}">
+                    <h:outputText value="#{gerechtenController.pagination.pageFirstItem + 1}..#{gerechtenController.pagination.pageLastItem + 1}/#{gerechtenController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{gerechtenController.previous}" value="#{bundle.Previous} #{gerechtenController.pagination.pageSize}" rendered="#{gerechtenController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{gerechtenController.next}" value="#{bundle.Next} #{gerechtenController.pagination.pageSize}" rendered="#{gerechtenController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{gerechtenController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGerechtenTitle_gerechtenid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gerechtenid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGerechtenTitle_gerechtnaam}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gerechtnaam}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGerechtenTitle_gerechtprijs}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gerechtprijs}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGerechtenTitle_gerechtenaantalbesteld}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gerechtenaantalbesteld}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGerechtenTitle_gerechtenvoorraad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gerechtenvoorraad}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGerechtenTitle_totaal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totaal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{gerechtenController.prepareView}" value="#{bundle.ListGerechtenViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{gerechtenController.prepareEdit}" value="#{bundle.ListGerechtenEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{gerechtenController.destroy}" value="#{bundle.ListGerechtenDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{gerechtenController.prepareCreate}" value="#{bundle.ListGerechtenCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListGerechtenIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
