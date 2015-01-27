@@ -30,6 +30,7 @@ public class GerechtenFrame extends javax.swing.JFrame {
      */
     public GerechtenFrame() {
         initComponents();
+        RefreshList();
     }
 
     /**
@@ -83,10 +84,11 @@ public class GerechtenFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Voorraad");
 
-        jLabel5.setText("Aantal Besteld");
+        jLabel5.setText("# bestellen");
 
         jLabel6.setText("Totaal");
 
+        txtGerechtID.setEditable(false);
         txtGerechtID.setText("jTextField1");
 
         txtGerechtNaam.setText("jTextField2");
@@ -145,19 +147,19 @@ public class GerechtenFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel1)
-                                .addComponent(jLabel2)))
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGerechtPrijs, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtGerechtVoorraad, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 1, Short.MAX_VALUE)
                                 .addComponent(txtGerechtTotaal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtGerechtAantalBesteld)
                             .addComponent(txtGerechtNaam)
@@ -310,13 +312,15 @@ public class GerechtenFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void lsbGerechtenValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsbGerechtenValueChanged
-        int result = lsbGerechten.getSelectedIndex();
-        Gerechten gerechtenresultaat = zoek.ZoekGerechtByName(naam.get(result));
-        txtGerechtTotaal.setText(Integer.toString(gerechtenresultaat.getTotaal()));
-        txtGerechtID.setText(Long.toString(gerechtenresultaat.getId()));
-        txtGerechtPrijs.setText(Double.toString(gerechtenresultaat.getGerechtPrijs()));
-        txtGerechtVoorraad.setText(Integer.toString(gerechtenresultaat.getGerechtenVoorraad()));
-        txtGerechtAantalBesteld.setText(Integer.toString(gerechtenresultaat.getGerechtenAantalBesteld()));
+//        int result = lsbGerechten.getSelectedIndex();
+//        Gerechten gerechtenresultaat = zoek.ZoekGerechtByName(naam.get(result));
+//        txtGerechtTotaal.setText(Integer.toString(gerechtenresultaat.getTotaal()));
+//        txtGerechtID.setText(Long.toString(gerechtenresultaat.getId()));
+//        txtGerechtPrijs.setText(Double.toString(gerechtenresultaat.getGerechtPrijs()));
+//        txtGerechtVoorraad.setText(Integer.toString(gerechtenresultaat.getGerechtenVoorraad()));
+//        txtGerechtAantalBesteld.setText(Integer.toString(gerechtenresultaat.getGerechtenAantalBesteld()));
+//        txtGerechtNaam.setText(gerechtenresultaat.getGerechtNaam());
+          Box();
         
     }//GEN-LAST:event_lsbGerechtenValueChanged
 
@@ -332,6 +336,8 @@ public class GerechtenFrame extends javax.swing.JFrame {
                     naam.add(g.getGerechtNaam());
                 }
                 lsbGerechten.setListData(naam.toArray());
+                lsbGerechten.setSelectedIndex(0);
+                Box();
         
             } 
         catch (Exception e) {}
@@ -387,6 +393,21 @@ public class GerechtenFrame extends javax.swing.JFrame {
 //        btnNew.setVisible(true);
 //        btnSave.setVisible(false);
 //    }
+    
+    private void Box()
+    {
+        if(lsbGerechten.getSelectedIndex() != -1)
+        {
+            int res = lsbGerechten.getSelectedIndex();
+            Gerechten rgerechten = zoek.ZoekGerechtByName(naam.get(res));
+            txtGerechtTotaal.setText(Integer.toString(rgerechten.getTotaal()));
+            txtGerechtID.setText(Long.toString(rgerechten.getId()));
+            txtGerechtNaam.setText(rgerechten.getGerechtNaam());
+            txtGerechtPrijs.setText(Double.toString(rgerechten.getGerechtPrijs()));
+            txtGerechtAantalBesteld.setText(Integer.toString(rgerechten.getGerechtenAantalBesteld()));
+            txtGerechtVoorraad.setText(Integer.toString(rgerechten.getGerechtenVoorraad()));
+        }
+    }
     
     
     /**

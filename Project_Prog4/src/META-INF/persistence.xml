@@ -5,9 +5,8 @@
     <class>DAL.Reservatie</class>
     <class>DAL.Gebruiker</class>
     <class>DAL.Gerechten</class>
-    <class>DAL.Totaal</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/programmeren4Project"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/Prog4"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.password" value="usbw"/>

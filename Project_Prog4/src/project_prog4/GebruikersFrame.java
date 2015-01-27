@@ -6,6 +6,7 @@
 package project_prog4;
 
 import DAL.Gebruiker;
+import DAL.Gerechten;
 import Services.AanmakenList;
 import Services.Delete;
 import Services.Opslaan;
@@ -53,12 +54,12 @@ public class GebruikersFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtGebruikersnaam = new javax.swing.JTextField();
-        txtWachtwoord = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnEditGebruiker = new javax.swing.JButton();
         btnNewGebruiker = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        txtWachtwoord = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,8 +83,6 @@ public class GebruikersFrame extends javax.swing.JFrame {
 
         txtGebruikersnaam.setText("jTextField1");
 
-        txtWachtwoord.setText("jTextField2");
-
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +104,7 @@ public class GebruikersFrame extends javax.swing.JFrame {
             }
         });
 
+        txtID.setEditable(false);
         txtID.setText("jTextField1");
 
         btnBack.setText("Back");
@@ -113,6 +113,8 @@ public class GebruikersFrame extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+
+        txtWachtwoord.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,9 +132,9 @@ public class GebruikersFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtWachtwoord, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                            .addComponent(txtGebruikersnaam)
-                            .addComponent(txtID)))
+                            .addComponent(txtGebruikersnaam, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .addComponent(txtID)
+                            .addComponent(txtWachtwoord)))
                     .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditGebruiker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNewGebruiker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -259,6 +261,9 @@ public class GebruikersFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void lsbGebruikerValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsbGebruikerValueChanged
+        
+        Box();
+        
         if(lsbGebruiker.getSelectedIndex() != -1)
         {
             Gebruiker gebruikerresultaat = zoek.ZoekGebruikerDoorNaam(naam.get(lsbGebruiker.getSelectedIndex()));
@@ -268,6 +273,30 @@ public class GebruikersFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lsbGebruikerValueChanged
 
+    private void Box()
+    {
+//        if(lsbGerechten.getSelectedIndex() != -1)
+//        {
+//            int res = lsbGerechten.getSelectedIndex();
+//            Gerechten rgerechten = zoek.ZoekGerechtByName(naam.get(res));
+//            txtGerechtTotaal.setText(Integer.toString(rgerechten.getTotaal()));
+//            txtGerechtID.setText(Long.toString(rgerechten.getId()));
+//            txtGerechtNaam.setText(rgerechten.getGerechtNaam());
+//            txtGerechtPrijs.setText(Double.toString(rgerechten.getGerechtPrijs()));
+//            txtGerechtAantalBesteld.setText(Integer.toString(rgerechten.getGerechtenAantalBesteld()));
+//            txtGerechtVoorraad.setText(Integer.toString(rgerechten.getGerechtenVoorraad()));
+//        }
+        
+        if(lsbGebruiker.getSelectedIndex()!= -1)
+        {
+            int res = lsbGebruiker.getSelectedIndex();
+            Gebruiker rgebruiker = zoek.ZoekGebruikerDoorNaam(naam.get(res));
+            txtGebruikersnaam.setText(rgebruiker.getNaam());
+            txtID.setText(Long.toString(rgebruiker.getId()));
+            txtWachtwoord.setText(rgebruiker.getPassword());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -314,6 +343,8 @@ public class GebruikersFrame extends javax.swing.JFrame {
                     naam.add(g.getNaam());
                 }
                 lsbGebruiker.setListData(naam.toArray());
+                lsbGebruiker.setSelectedIndex(0);
+                Box();
         
             } 
         catch (Exception e) {}
@@ -333,6 +364,6 @@ public class GebruikersFrame extends javax.swing.JFrame {
     private javax.swing.JList lsbGebruiker;
     private javax.swing.JTextField txtGebruikersnaam;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtWachtwoord;
+    private javax.swing.JPasswordField txtWachtwoord;
     // End of variables declaration//GEN-END:variables
 }
