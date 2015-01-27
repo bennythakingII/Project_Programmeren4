@@ -5,6 +5,8 @@
  */
 package project_prog4;
 
+import Services.AanmakenList;
+
 /**
  *
  * @author Benjamin
@@ -17,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         btnReservatie.setVisible(false);
+        Refresh();
     }
 
     /**
@@ -30,21 +33,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtAantalGerechten = new javax.swing.JTextField();
-        txtAantalReservaties = new javax.swing.JTextField();
+        txtGerechten = new javax.swing.JTextField();
+        txtGebruikers = new javax.swing.JTextField();
         btnGerechten = new javax.swing.JButton();
         btnReservatie = new javax.swing.JButton();
         btnGebruikers = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnAfrekenen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("Overzicht"); // NOI18N
 
         jLabel1.setText("Aantal Gerechten");
 
-        jLabel2.setText("Aantal Reservaties");
+        jLabel2.setText("Aantal Gebruikers");
 
-        txtAantalGerechten.setText("jTextField1");
+        txtGerechten.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtGerechten.setText("jTextField1");
 
-        txtAantalReservaties.setText("jTextField2");
+        txtGebruikers.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtGebruikers.setText("jTextField2");
 
         btnGerechten.setText("Gerechten");
         btnGerechten.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +70,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Overzicht");
+
+        btnAfrekenen.setText("Afrekenen");
+        btnAfrekenen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfrekenenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,43 +86,55 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAantalGerechten, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(txtAantalReservaties)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnGerechten)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnReservatie)
                         .addGap(26, 26, 26)
-                        .addComponent(btnGebruikers)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtGerechten)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(43, 43, 43))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGerechten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(42, 42, 42)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtGebruikers)
+                            .addComponent(btnGebruikers)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnReservatie)
+                            .addComponent(btnAfrekenen, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtAantalGerechten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel2))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtAantalReservaties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(txtGerechten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGebruikers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGerechten)
-                    .addComponent(btnReservatie)
                     .addComponent(btnGebruikers))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAfrekenen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReservatie)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerechtenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerechtenActionPerformed
@@ -118,6 +147,20 @@ public class MainFrame extends javax.swing.JFrame {
         new GebruikersFrame().setVisible(true);
     }//GEN-LAST:event_btnGebruikersActionPerformed
 
+    private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
+        this.setVisible(false);
+        new Afrekenen().setVisible(true);
+    }//GEN-LAST:event_btnAfrekenenActionPerformed
+
+    private void Refresh()
+    {
+        AanmakenList lijst = new AanmakenList();
+        int geb = lijst.ListGebruiker().size();
+        int ger = lijst.ListGerechten().size();
+        txtGerechten.setText(Integer.toString(ger));
+        txtGebruikers.setText(Integer.toString(geb));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -154,12 +197,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAfrekenen;
     private javax.swing.JButton btnGebruikers;
     private javax.swing.JButton btnGerechten;
     private javax.swing.JButton btnReservatie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtAantalGerechten;
-    private javax.swing.JTextField txtAantalReservaties;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField txtGebruikers;
+    private javax.swing.JTextField txtGerechten;
     // End of variables declaration//GEN-END:variables
 }

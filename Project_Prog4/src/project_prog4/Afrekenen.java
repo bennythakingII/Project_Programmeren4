@@ -98,11 +98,11 @@ Zoeken zoek =  new Zoeken();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(69, 69, 69)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(80, 80, 80))
+                .addGap(106, 106, 106))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,6 +137,7 @@ Zoeken zoek =  new Zoeken();
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
@@ -159,7 +160,12 @@ Zoeken zoek =  new Zoeken();
     }//GEN-LAST:event_lsbGebruikerValueChanged
 
     private void lsbBestellingValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsbBestellingValueChanged
-        // TODO add your handling code here:
+        if(lsbBestelling.getSelectedIndex() != -1)
+        {
+            Gerechten ger = zoek.ZoekGerechtByName(naam.get(lsbBestelling.getSelectedIndex()));
+            GerechtenList(ger);
+//            GebruikerList(ger);
+        }
     }//GEN-LAST:event_lsbBestellingValueChanged
 
     private void GebruikerList()
