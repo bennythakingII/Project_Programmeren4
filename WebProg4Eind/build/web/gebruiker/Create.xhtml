@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateGebruikerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateGebruikerLabel_gebruikerid}" for="gebruikerid" />
+                    <h:inputText id="gebruikerid" value="#{gebruikerController.selected.gebruikerid}" title="#{bundle.CreateGebruikerTitle_gebruikerid}" required="true" requiredMessage="#{bundle.CreateGebruikerRequiredMessage_gebruikerid}"/>
+                    <h:outputLabel value="#{bundle.CreateGebruikerLabel_admin}" for="admin" />
+                    <h:inputText id="admin" value="#{gebruikerController.selected.admin}" title="#{bundle.CreateGebruikerTitle_admin}" />
+                    <h:outputLabel value="#{bundle.CreateGebruikerLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{gebruikerController.selected.email}" title="#{bundle.CreateGebruikerTitle_email}" />
+                    <h:outputLabel value="#{bundle.CreateGebruikerLabel_naam}" for="naam" />
+                    <h:inputText id="naam" value="#{gebruikerController.selected.naam}" title="#{bundle.CreateGebruikerTitle_naam}" />
+                    <h:outputLabel value="#{bundle.CreateGebruikerLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{gebruikerController.selected.password}" title="#{bundle.CreateGebruikerTitle_password}" />
+                    <h:outputLabel value="#{bundle.CreateGebruikerLabel_telefoonnummer}" for="telefoonnummer" />
+                    <h:inputText id="telefoonnummer" value="#{gebruikerController.selected.telefoonnummer}" title="#{bundle.CreateGebruikerTitle_telefoonnummer}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{gebruikerController.create}" value="#{bundle.CreateGebruikerSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{gebruikerController.prepareList}" value="#{bundle.CreateGebruikerShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateGebruikerIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

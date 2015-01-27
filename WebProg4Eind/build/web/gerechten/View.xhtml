@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGerechtenTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewGerechtenLabel_gerechtenid}"/>
+                    <h:outputText value="#{gerechtenController.selected.gerechtenid}" title="#{bundle.ViewGerechtenTitle_gerechtenid}"/>
+                    <h:outputText value="#{bundle.ViewGerechtenLabel_gerechtnaam}"/>
+                    <h:outputText value="#{gerechtenController.selected.gerechtnaam}" title="#{bundle.ViewGerechtenTitle_gerechtnaam}"/>
+                    <h:outputText value="#{bundle.ViewGerechtenLabel_gerechtprijs}"/>
+                    <h:outputText value="#{gerechtenController.selected.gerechtprijs}" title="#{bundle.ViewGerechtenTitle_gerechtprijs}"/>
+                    <h:outputText value="#{bundle.ViewGerechtenLabel_gerechtenaantalbesteld}"/>
+                    <h:outputText value="#{gerechtenController.selected.gerechtenaantalbesteld}" title="#{bundle.ViewGerechtenTitle_gerechtenaantalbesteld}"/>
+                    <h:outputText value="#{bundle.ViewGerechtenLabel_gerechtenvoorraad}"/>
+                    <h:outputText value="#{gerechtenController.selected.gerechtenvoorraad}" title="#{bundle.ViewGerechtenTitle_gerechtenvoorraad}"/>
+                    <h:outputText value="#{bundle.ViewGerechtenLabel_totaal}"/>
+                    <h:outputText value="#{gerechtenController.selected.totaal}" title="#{bundle.ViewGerechtenTitle_totaal}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{gerechtenController.destroyAndView}" value="#{bundle.ViewGerechtenDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewGerechtenEditLink}"/>
+                <br />
+                <h:commandLink action="#{gerechtenController.prepareCreate}" value="#{bundle.ViewGerechtenCreateLink}" />
+                <br />
+                <h:commandLink action="#{gerechtenController.prepareList}" value="#{bundle.ViewGerechtenShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewGerechtenIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

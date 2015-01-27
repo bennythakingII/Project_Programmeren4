@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGebruikerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewGebruikerLabel_gebruikerid}"/>
+                    <h:outputText value="#{gebruikerController.selected.gebruikerid}" title="#{bundle.ViewGebruikerTitle_gebruikerid}"/>
+                    <h:outputText value="#{bundle.ViewGebruikerLabel_admin}"/>
+                    <h:outputText value="#{gebruikerController.selected.admin}" title="#{bundle.ViewGebruikerTitle_admin}"/>
+                    <h:outputText value="#{bundle.ViewGebruikerLabel_email}"/>
+                    <h:outputText value="#{gebruikerController.selected.email}" title="#{bundle.ViewGebruikerTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewGebruikerLabel_naam}"/>
+                    <h:outputText value="#{gebruikerController.selected.naam}" title="#{bundle.ViewGebruikerTitle_naam}"/>
+                    <h:outputText value="#{bundle.ViewGebruikerLabel_password}"/>
+                    <h:outputText value="#{gebruikerController.selected.password}" title="#{bundle.ViewGebruikerTitle_password}"/>
+                    <h:outputText value="#{bundle.ViewGebruikerLabel_telefoonnummer}"/>
+                    <h:outputText value="#{gebruikerController.selected.telefoonnummer}" title="#{bundle.ViewGebruikerTitle_telefoonnummer}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{gebruikerController.destroyAndView}" value="#{bundle.ViewGebruikerDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewGebruikerEditLink}"/>
+                <br />
+                <h:commandLink action="#{gebruikerController.prepareCreate}" value="#{bundle.ViewGebruikerCreateLink}" />
+                <br />
+                <h:commandLink action="#{gebruikerController.prepareList}" value="#{bundle.ViewGebruikerShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewGebruikerIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
