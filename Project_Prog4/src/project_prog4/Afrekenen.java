@@ -160,12 +160,12 @@ Zoeken zoek =  new Zoeken();
     }//GEN-LAST:event_lsbGebruikerValueChanged
 
     private void lsbBestellingValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsbBestellingValueChanged
-        if(lsbBestelling.getSelectedIndex() != -1)
-        {
-            Gerechten ger = zoek.ZoekGerechtByName(naam.get(lsbBestelling.getSelectedIndex()));
-            GerechtenList(ger);
-//            GebruikerList(ger);
-        }
+//        if(lsbBestelling.getSelectedIndex() != -1)
+//        {
+//            Gerechten ger = zoek.ZoekGerechtByName(naam.get(lsbBestelling.getSelectedIndex()));
+//            GerechtenList(ger);
+////            GebruikerList(ger);
+//        }
     }//GEN-LAST:event_lsbBestellingValueChanged
 
     private void GebruikerList()
