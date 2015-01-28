@@ -160,16 +160,16 @@ Zoeken zoek =  new Zoeken();
     }//GEN-LAST:event_lsbGebruikerValueChanged
 
     private void lsbBestellingValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsbBestellingValueChanged
-<<<<<<< HEAD
-//        if(lsbBestelling.getSelectedIndex() != -1)
-//        {
-//            Gerechten ger = zoek.ZoekGerechtByName(naam.get(lsbBestelling.getSelectedIndex()));
-//            GerechtenList(ger);
-////            GebruikerList(ger);
-//        }
-=======
-        
->>>>>>> origin/master
+//<<<<<<< HEAD
+////        if(lsbBestelling.getSelectedIndex() != -1)
+////        {
+////            Gerechten ger = zoek.ZoekGerechtByName(naam.get(lsbBestelling.getSelectedIndex()));
+////            GerechtenList(ger);
+//////            GebruikerList(ger);
+////        }
+//=======
+//        
+//>>>>>>> origin/master
     }//GEN-LAST:event_lsbBestellingValueChanged
 
     private void GebruikerList()
@@ -178,10 +178,9 @@ Zoeken zoek =  new Zoeken();
             naam.clear();
             AanmakenList list = new AanmakenList();
             List<Gebruiker> GebruikerList = list.ListGebruiker();
-            for(Gebruiker g : GebruikerList)
-            {
+            GebruikerList.stream().forEach((g) -> {
                 naam.add(g.getNaam());
-            }
+            });
             lsbGebruiker.setListData(naam.toArray());
             lsbBestelling.setListData(gerechten.toArray());
         } catch (Exception e) {
@@ -195,10 +194,9 @@ Zoeken zoek =  new Zoeken();
             lsbBestelling.setListData(gerechten.toArray());
             AanmakenList list = new AanmakenList();
             List<Gerechten> GerechtenList = list.ProductByGebruikerList(gebruiker);
-            for(Gerechten g : GerechtenList)
-            {
+            GerechtenList.stream().forEach((g) -> {
                 gerechten.add(g.getGerechtNaam() + " " + g.getTotaal());
-            }
+            });
             lsbBestelling.setListData(gerechten.toArray());
         } catch (Exception e) {
         }

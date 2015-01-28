@@ -83,18 +83,19 @@ public class AanmakenList
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("SELECT d.GerechtenID FROM Totaal d WHERE d.GebruikerID = :Id", Totaal.class);
+        Query query = em.createQuery("SELECT d.GerechtendID FROM Totaal d WHERE d.GebruikerID = :Id", Totaal.class);
         List<Long> TotaalList = query.setParameter("Id", gebruiker.getId()).getResultList();
         System.out.println(TotaalList.get(0));
         
         ArrayList<Gerechten> gerechtenlist = new ArrayList<>();
         Zoeken z = new Zoeken();
         
-        for(Long l : TotaalList)
-        {
+        TotaalList.stream().map((l) -> {
             System.out.println(l);
+            return l;
+        }).forEach((l) -> {
             gerechtenlist.add(z.ZoekGerechtenByID(l));
-        }
+        });
         System.out.println("Succes " + gerechtenlist.get(0).getGerechtNaam());
         return gerechtenlist;
     }

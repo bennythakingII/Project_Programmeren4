@@ -7,9 +7,11 @@ package project_prog4;
 
 import DAL.Gebruiker;
 import Services.Zoeken;
+import java.awt.event.KeyEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,8 @@ import javax.swing.JOptionPane;
  */
 public class LoginFrame extends javax.swing.JFrame {
 
+    
+    
     /**
      * Creates new form LoginFrame
      */
@@ -25,6 +29,7 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,16 +44,19 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtLoginUsername = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtLoginPassword.setText("jPasswordField1");
+        txtLoginPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginPasswordKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");
-
-        txtLoginUsername.setText("jTextField1");
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -56,31 +64,44 @@ public class LoginFrame extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLoginKeyPressed(evt);
+            }
+        });
+
+        jLabel3.setText("Gelieve in te loggen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtLoginPassword)
-                            .addComponent(txtLoginUsername)))
+                            .addComponent(txtLoginUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(41, 41, 41)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtLoginUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -90,7 +111,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(30, 30, 30)
                 .addComponent(btnLogin)
-                .addGap(71, 71, 71))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -98,13 +119,16 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
+        
+             try {
             Zoeken z = new Zoeken();
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PU");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
             EntityManager em = emf.createEntityManager();
-            
+//            g.isAdmin() == true
             Gebruiker g = z.ZoekGebruikerDoorNaam(txtLoginUsername.getText());
-            if(g.isAdmin() == true && g.getPassword().equals(txtLoginPassword.getText()))
+            if(
+//                    g.getNaam().equals(txtLoginUsername.getText()) && 
+                    g.getPassword().equals(txtLoginPassword.getText()))
             {
                 new MainFrame().setVisible(true);
                 this.setVisible(false);
@@ -113,11 +137,42 @@ public class LoginFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Password is wrong","Fout", JOptionPane.WARNING_MESSAGE);
             }
-            
-        } catch (Exception ex) {
+            } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"De naam dat u heeft ingevoerd bestaat niet, als deze wel zou moeten bestaan neem dan contact op met onze support", "NoName", JOptionPane.WARNING_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+        
+            
+    }//GEN-LAST:event_btnLoginKeyPressed
+
+    private void txtLoginPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginPasswordKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            try {
+            Zoeken z = new Zoeken();
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("Project_Prog4PUS");
+            EntityManager em = emf.createEntityManager();
+//            g.isAdmin() == true
+            Gebruiker g = z.ZoekGebruikerDoorNaam(txtLoginUsername.getText());
+            if(
+//                    g.getNaam().equals(txtLoginUsername.getText()) && 
+                    g.getPassword().equals(txtLoginPassword.getText()))
+            {
+                new MainFrame().setVisible(true);
+                this.setVisible(false);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Password is wrong","Fout", JOptionPane.WARNING_MESSAGE);
+            }
+            } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"De naam dat u heeft ingevoerd bestaat niet, als deze wel zou moeten bestaan neem dan contact op met onze support", "NoName", JOptionPane.WARNING_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_txtLoginPasswordKeyPressed
 
     /**
      * @param args the command line arguments
@@ -158,6 +213,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField txtLoginPassword;
     private javax.swing.JTextField txtLoginUsername;
     // End of variables declaration//GEN-END:variables
